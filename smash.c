@@ -6,17 +6,24 @@
 #include <errno.h>
 #include <unistd.h>
 #include<stdlib.h>
+#include "smash.h"
+
 
 //	**User Define**
 //---------------------------
 //---------------------------
-#include "history.h"
+//#include "history.h"
+//#include "commands.h"
 //	**Constants**
 //---------------------------
 //---------------------------
 #define MAXLINE 4096
 #define PATHLEN 100 // length of the current path to return to the user.
 
+void init_history(void); //builds data structures for recording cmd history
+void add_history(char *cmd, int exitStatus); //Adds an entry to the history
+void clear_history(void); //Frees all malloc'd memory in the history
+void print_history(int firstSequenceNumber); //Prints the history to stdout
 //	**Method Prototypes**
 //---------------------------
 //---------------------------
@@ -69,6 +76,8 @@ void executeCommand(char *str)
 //--------------------------------------------------------------
 	if (strcmp(args[0], "exit") == 0) 
 	{
+	  
+	  clear_history();
 	  exit(0);
 	} 
 //	**CD COMMAND**
@@ -76,6 +85,7 @@ void executeCommand(char *str)
 //---------------------------------------
 	else if (strcmp(args[0], "cd") == 0)
 	{
+	
 		if(command_count >=2) // makes sure cd also contains a path name.
 		{
 			if(chdir(args[1]) == 0)//checks that directory user attempted to cd to exists 0 ==true
@@ -92,13 +102,21 @@ void executeCommand(char *str)
 //---------------------------------------
 	else if (strcmp(args[0], "history") == 0)
 	{
-		//print_history();
+		if(command_count == 1)
+		{
+		add_history(str,1);
+		print_history(0);
+		}
+		else if(command_count > 1)
+		{
+			
+		}
 	}
 	else //command is unrecognized  
 	{
 		for (int index=0;index < command_count;index++)
 		{
-			printf("args[%d] %s\n",index,args[index]);		
+			printf("[%d] %s\n",index,args[index]);		
 		}		
 	}
 }
@@ -119,4 +137,5 @@ int numberOfCommands(char *str1)
 	}
 	return command_count;
 }
+
 
