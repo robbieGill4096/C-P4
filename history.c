@@ -8,7 +8,7 @@ struct Cmd
 	{
 		int exitStatus;
 		int label;
-		char cmd*;
+		char cmd[];
 	};
 
 
