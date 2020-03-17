@@ -52,14 +52,14 @@ void executeCommand(char *str)
 		{
 			if(chdir(args[1]) == 0)//checks that directory user attempted to cd to exists 0 ==true
 			{
-				add_history(target,1);
+				add_history(target,0);
 				printf("%s\n",getcwd(current_dir_path, 256)); 
 					
 			}
 			else //if directory is not found prints error message including failed directory name. 
 			{
 				printf("%s: No such file or directory",target);
-				add_history(target,127);
+				add_history(target,1);
 			}
 		}
 	}
@@ -69,13 +69,14 @@ void executeCommand(char *str)
 	{
 		if(command_count == 1 ||atoi(args[1]) == 0 )
 		{
-			add_history(target,1);
+			add_history(target,0);
 			print_history(0);
 		}
 		else if(command_count > 0 && atoi(args[1])>0 && atoi(args[1]) < 10)
 		{
 			//if user specifies how much of the sequence.
-			print_history(atoi(args[1]));
+			//add_history(target,0);
+			//print_history(atoi(args[1]));
 		}
 	}
 	else //command is unrecognized  

@@ -1,0 +1,24 @@
+1. Verify that a blank line merely prints a prompt to stderr for the next command
+2. Verify that EOF exits normally 
+3. Verify that exit exits normaly
+4. Verify that cd without arguments dosen't do anything
+5. Verify that history 3 prints the history starting from sequence number 3 to MAXHISTORY
+
+6. Verify that cd to an existing directory actually changes the smash working directory
+
+7. Verify that smash compiles without errors 
+8. Verify that history saves external commands
+9. Verify that exit reports the correct exit status
+10. Verify that files are configured correctly
+11. Verify that all malloced memory is free'd 
+12. Verify that print statements match specifications
+13. Verify that when cd cd to a non-existent directory prints an error message to stderr
+14. Verify that smash clean removes all binary/executable files
+15. Verify that Jim actually reads this. 
+16. Verify that History free's the first element of history when MAXHISTORY is reached
+17. Verify that program compiles with -std=c99 and -Wall
+18. Verify that excessive lines <4096 don't crash the program in commands.c 
+19. Verify that (*.h) depdendecies are only rebuilt when a header file has been updated
+20. Verify that failed commands display a 1 exitStatus in history
+21. Verify that external commands display a 127 exitStatus in history 
+22. Verify that smash history command prints exactly 10 commands
