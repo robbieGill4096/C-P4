@@ -66,7 +66,7 @@ void print_history(int firstSequenceNumber) {
 		for(int i=firstSequenceNumber; i< init_label; i++)
 		{
 			
-			printf("%d  %s\n",array[i]->label,array[i]->cmd);	
+			printf("[%d] %s\n",array[i]->label,array[i]->cmd);	
 			//printf("%s",array[i]->cmd);
 		}	
 	}
@@ -77,7 +77,7 @@ void print_history(int firstSequenceNumber) {
 		{
 		
 
-			printf("[%d]  %s\n",array[i]->exitStatus,array[i]->cmd);	
+			printf("[%d] %s\n",array[i]->exitStatus,array[i]->cmd);	
 			//printf("%s",array[i]->cmd);
 		}
 	     }		
