@@ -61,7 +61,7 @@ void init_history(void){
 
 }
 void print_history(int firstSequenceNumber) {
-	if (init_label < 10)
+	if ((init_label < 10) && firstSequenceNumber ==0)
 	{
 		for(int i=firstSequenceNumber; i< init_label; i++)
 		{
@@ -73,11 +73,11 @@ void print_history(int firstSequenceNumber) {
 	else{
 
 	
-		for(int i=firstSequenceNumber; i< MAXHISTORY; i++)
+		for(int i=firstSequenceNumber; i< init_label; i++)
 		{
 		
 
-			printf("%d  %s\n",array[i]->label,array[i]->cmd);	
+			printf("[%d]  %s\n",array[i]->exitStatus,array[i]->cmd);	
 			//printf("%s",array[i]->cmd);
 		}
 	     }		
@@ -93,32 +93,4 @@ void clear_history(void) {
 
 }
 
-
-
-int main(){
-/*
-			array[0]=malloc(sizeof(struct Cmd) + sizeof(char) * strlen("adsf"));
-			strcpy(array[0]->cmd,"adsf");
-			array[0] -> exitStatus = 1;
-			array[0] -> label = 1;
-			init_label++;
-*/
-add_history("cd",1);
-add_history("ls -la ",1);
-add_history("history",1);
-
-//add_history("mkdir",1);
-//add_history("gcc histo.c -o his",1);
-//add_history("cd path/path/path/pathpath/path/path/pathpath/path/path/pathpath/path/path/path",1);
-//add_history("help",1);
-//add_history("man",1);
-//add_history("quit",1);
-//add_history("write",1);
-//add_history("add something",127);
-
-print_history(0);
-
-return 0;
-
-}
 

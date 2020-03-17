@@ -4,17 +4,26 @@
 #include <unistd.h>
 #include<stdlib.h>
 #include "smash.h"
+#include <string.h>
+#include <stdlib.h>
 void init_history(void); //builds data structures for recording cmd history
 void add_history(char *cmd, int exitStatus); //Adds an entry to the history
 void clear_history(void); //Frees all malloc'd memory in the history
 void print_history(int firstSequenceNumber); //Prints the history to stdout
 
+
+char *strdup(const char *s);
+
 void executeCommand(char *str)
-{
+{	
 	
 	char current_dir_path[100]; 
 	char *args[1000];
 	int i =0;
+ 
+	char *target;
+	target=malloc(4096);
+	memcpy(target,str,4096);//removed * from *memcpy
 	
 	char *p = strtok (str," ");
 	while (p != NULL)
@@ -25,12 +34,12 @@ void executeCommand(char *str)
 	int command_count =i;
 //--------------------------------------------------------------
 //--------------------------------------------------------------
-	
+	//printf("the value of str is:%s\n",target);
 
 	if (strcmp(args[0], "exit") == 0) 
 	{
-	  
 	  clear_history();
+	  free(target);
 	  exit(0);
 	} 
 //	**CD COMMAND**
@@ -43,16 +52,14 @@ void executeCommand(char *str)
 		{
 			if(chdir(args[1]) == 0)//checks that directory user attempted to cd to exists 0 ==true
 			{
-				add_history(*str,1);
-				printf("%s\n",getcwd(current_dir_path, 100)); 
-				
-				
+				add_history(target,1);
+				printf("%s\n",getcwd(current_dir_path, 256)); 
+					
 			}
 			else //if directory is not found prints error message including failed directory name. 
 			{
-				printf("the value of str is %s\n",str); 
-			add_history("cd",127);
-			printf("%s:No such file or directory\n",args[1]);
+				printf("%s: No such file or directory",target);
+				add_history(target,127);
 			}
 		}
 	}
@@ -60,28 +67,33 @@ void executeCommand(char *str)
 //---------------------------------------
 	else if (strcmp(args[0], "history") == 0)
 	{
-		if(command_count == 1)
+		if(command_count == 1 ||atoi(args[1]) == 0 )
 		{
-			add_history(str,1);
-			printf("the value of str is %s\n",str); 
+			add_history(target,1);
 			print_history(0);
 		}
-		else if(command_count > 1)
+		else if(command_count > 0 && atoi(args[1])>0 && atoi(args[1]) < 10)
 		{
 			//if user specifies how much of the sequence.
+			print_history(atoi(args[1]));
 		}
 	}
 	else //command is unrecognized  
 	{	
-		add_history(str,127);
+		add_history(target,127);
 		for (int index=0;index < command_count;index++)
 		{
 			
 			printf("[%d] %s\n",index,args[index]);		
 		}		
 	}
+
+	free(target);
 }
+
 //	**calculates the number of commands read in from a pointer**
 //--------------------------------------------------------------
 //--------------------------------------------------------------
+
+
 

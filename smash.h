@@ -1,6 +1,10 @@
+
 #include "history.h"
-#ifdef SMASH_H_
-#define SMASH_H_
+//#include "commands.c"
+#ifdef COMMANDS_C_
+#define COMMANDS_C_
+
+//extern int BFR_SIZE;
 void executeCommand(char *str);
 
 #endif
