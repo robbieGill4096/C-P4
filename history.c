@@ -61,6 +61,27 @@ void init_history(void){
 
 }
 void print_history(int firstSequenceNumber) {
+	if (init_label < 10){
+
+			for(int i=0; i< init_label; i++)
+					{
+					
+
+						printf("[%d] %s\n",array[i]->exitStatus,array[i]->cmd);	
+						//printf("%s",array[i]->cmd);
+					}
+			}
+	else
+	{
+		for(int i=0; i< MAXHISTORY; i++)
+		{
+		
+
+			printf("[%d] %s\n",array[i]->exitStatus,array[i]->cmd);	
+			
+		}
+
+	}
 	/*if ((init_label < 10) && firstSequenceNumber ==0)
 	{
 		for(int i=firstSequenceNumber; i< init_label+1; i++)
@@ -70,12 +91,12 @@ void print_history(int firstSequenceNumber) {
 			//printf("%s",array[i]->cmd);
 		}	
 	}*/
-	for(int i=0; i< MAXHISTORY; i++)
-	{
+	//for(int i=0; i< MAXHISTORY; i++)
+	//{
 			
-		printf("[%d] %s\n",array[i]->label,array[i]->cmd);	
+		//printf("[%d] %s\n",array[i]->label,array[i]->cmd);	
 			
-	}	
+	//}	
 
 
 /*
